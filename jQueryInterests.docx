@@ -1,0 +1,83 @@
+Hello all and welcome to the game catalog that I have created. This website that I have created is a visual aid to describe some games I have been playing in the past few years. I have a key visual of each game, alongside the name and a critical review score of the game. I have also inserted an aside at the bottom which will give a brief description of the game with a link to the website for the user to visit themselves. The purpose of this website is to: 
+1. List games I actively play 
+2. Allow the user to interact with each card and see the review score I have given of the game. 
+3. Access the game’s website through the aside. 
+
+ 
+To use the application, a user will need to visit my website. Once on the website, if the user looks at each card, the name and genre are listed on each individual card. Once you hover over the card, you will see whether I actively play the game or not. If a user clicks the card, they can view my rating of the game. When the user hovers off the card, it will go back to the default of the name/genre of the card. 
+
+The initial event of each card being loaded is by a function which takes an index of the array. It equals the first index position of the array. 
+
+An event occurs when a box is clicked and grabs the review score out of the corresponding index from the array. 
+
+When mousing over the box, a function will find the index of the item from the array and hover the box to a 10-pixel black border to help the user see what box they are currently hovering. 
+
+An event occurs when a mouse out action has occurred on the box. The styling of the box is changed back to it’s original styling, resetting the 10-pixel black border. It will also default back of the name and genre of the game. 
+
+
+Criteria/Code
+Interface is Authentic, Professional, Balanced Interface design is authentic, looks professional, is balanced across the web page 
+	This part was done using styling on the index page. Added a teal background w/ an aside to fit to the bottom of the screen after viewing the cards. 
+    Refer to index.html
+
+Interface links to functional jQuery. jQuery is included in application source 
+	Jquery included in program, refer to next boxes for direct examples. 
+    Added the jquery javascript to the index.html file which allows use of jquery with $ operator. 
+
+Events are Effective, jQuery jQuery is used to bind events to event handlers<br/> The event handling mechanism works to achieve goals. 
+Selects paragraph elements in the code and sets an equal index of the element being hovered. This code grabs the game and and grenre of the the matched set array and labels it on the front of the card.
+	    $("p").eq(index).html(`${games[index].game_name}<br>Game Genre: ${games[index].genre}`);
+
+DOM Access, jQuery The DOM is accessed with jQuery 
+uses function showInformation to call setupboxes and create boxes for each element. Each box has its content automatically updatd.
+	const showInformation = () => {
+    setUpBoxes();
+    jQuery.each($(".box"),establishGameInfo);
+
+
+each class of box is selected and when clicked, it will add the review score of the array to the box. index is used to link the match set of the array, and the "p" is changed. 
+$(".box").on("click", function() {
+
+let indexofGame = $(".box").index(this);
+$(this).find("p").text(`Review Score: ${games[indexofGame].review_score}`);
+});
+
+On a mouseover event, the styling gets changed to black 10 pixel border by accessing the border style and using index to work in a similar way to the previous event. It is seelecting the actively played array information.
+$(".box").on("mouseover", function () {
+    $(this).css("border", "10px solid black");
+    let indexofGame = $(".box").index(this);
+    $(this).find("p").text(`Actively played?: ${games[indexofGame].actively_played}`);
+});
+
+on a mouse out event, the function will revert back to it's original 2 px black border. The mouse out action uses $(this) again to access the element I am working with. Let indexofGame=$(".box").index(this); uses the index method to find the position of the element. The code then utilizes the p tags to fill the box element with the review information from the array. The string accesses the array to insert the info and uses a break tag. 
+$(".box").on("mouseout", function () {
+    $(this).css("border", "2px solid black");
+    let indexofGame = $(".box").index(this);
+    $(this).find("p").html(`${games[indexofGame].game_name}<br> Game Genre: ${games[indexofGame].genre}`);
+    });
+    };
+
+
+DOM Dynamically Built, jQuery The DOM is dynamically updated using jQuery calls 
+The container holds all the cards I have created. The list of games is being added from the array. An image is being automatically appended to each box and a description is included. A looop is utilized to apply this to each item in the array.
+	const setUpBoxes = ()=> {
+    let wrapperRef = $('.container');
+    games.forEach((game)=>{
+        let boxMarkup= ` <div class="box">
+        <img class="game_pic" src="./images/${game.game_name.toLowerCase()}.png" />
+        <p class="review"></p>
+        </div>`;
+        wrapperRef.append(boxMarkup);
+
+    }
+);
+}
+
+
+Documentation: Program Code and Project Description .js file is fully annotated, explaining the code, not just stating that a call is being used. <br/> There is a document describing how the application works and how to use it, and the goal of the application 
+	Reference this document
+Style, jQuery In at least one instance, style is modified or applied using jQuery 
+	    $(this).css("border", "10px solid black");
+    $(this).css("border", "2px solid black");
+Adds a large black border when card is hovered, removes black border when card is de-selected. 
+
